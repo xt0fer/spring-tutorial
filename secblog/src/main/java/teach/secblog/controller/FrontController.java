@@ -17,5 +17,4 @@ public class FrontController {
         model.addAttribute("news", newsService.getAllNews());
         return "front";
     }
-
 }

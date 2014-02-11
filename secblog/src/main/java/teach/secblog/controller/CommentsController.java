@@ -20,20 +20,20 @@ public class CommentsController {
     @Autowired
     private NewsService newsService;
 
-    @RequestMapping(value = "/{newsindex}/delete/{commentindex}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{newsindex}/{commentindex}", method = RequestMethod.GET)
     public String deleteComment(ModelMap model, @PathVariable("newsindex") Integer newsindex, @PathVariable("commentindex") Integer commentindex) {
         newsService.deleteComment(newsindex, commentindex);
         return "redirect:/news/" + newsindex + ".do";
     }
 
-    @RequestMapping(value = "/{newsindex}/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add/{newsindex}", method = RequestMethod.GET)
     public String addComment(ModelMap model, @PathVariable("newsindex") Integer newsindex) {
         model.addAttribute("comment", new Comment());
         model.addAttribute("newsindex", newsindex);
         return "addComment";
     }
 
-    @RequestMapping(value = "{newsindex}/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add/{newsindex}", method = RequestMethod.POST)
     public String saveComment(@Valid @ModelAttribute("comment") Comment comment, BindingResult bindingResult, @PathVariable("newsindex") Integer newsindex, ModelMap model) {
         if (bindingResult.hasErrors()) {
             return "addComment";

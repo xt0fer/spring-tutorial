@@ -11,6 +11,7 @@ public class HelloController {
 
     @RequestMapping("/index")
     public String hello(ModelMap model) {
+        model.addAttribute("message", "Hello world");
         model.addAttribute("date", new Date());
         return "hello";
     }

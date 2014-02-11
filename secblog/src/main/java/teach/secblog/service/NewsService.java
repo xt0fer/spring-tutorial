@@ -1,6 +1,7 @@
 package teach.secblog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import teach.secblog.model.Comment;
 import teach.secblog.model.News;
@@ -29,6 +30,7 @@ public class NewsService {
         repository.insertComment(repository.getNewsByIndex(newsindex), comment);
     }
 
+    @Secured("ROLE_INEXISTENT")
     public void deleteNews(Integer index) {
         repository.deleteNews(repository.getNewsByIndex(index));
     }

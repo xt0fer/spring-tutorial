@@ -14,7 +14,7 @@
 
         <div class="clearfix">
             <div class="pull-left">
-                <a href="/comments/delete/${newsindex}/${status.index}.do" class="btn btn-danger">Sterge</a>
+                <a href="/comments/${newsindex}/delete/${status.index}.do" class="btn btn-danger">Sterge</a>
             </div>
         </div>
     </div>

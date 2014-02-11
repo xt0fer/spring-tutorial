@@ -19,6 +19,7 @@
             </div>
         </div>
     </div>
+    <hr/>
 </c:forEach>
 
 <jsp:include page="template/footer.jsp"/>

@@ -34,6 +34,7 @@ public class NewsService {
     }
 
     public void deleteComment(Integer newsindex, Integer commentindex) {
-        repository.getNewsByIndex(newsindex).getComments().remove(commentindex);
+        News news = repository.getNewsByIndex(newsindex);
+        repository.deleteComment(news, news.getComments().get(commentindex));
     }
 }

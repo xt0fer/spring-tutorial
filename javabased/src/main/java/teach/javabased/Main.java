@@ -3,7 +3,6 @@ package teach.javabased;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import teach.javabased.config.AppConfig;
-import teach.javabased.config.DatabaseConfig;
 
 public class Main {
 

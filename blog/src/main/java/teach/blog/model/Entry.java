@@ -3,12 +3,12 @@ package teach.blog.model;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "COMMENTS")
-public class Comment {
+@Table(name = "ENTRIES")
+public class Entry {
 
     @Id
     @Column(name = "ID")
@@ -19,15 +19,17 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    @Lob
-    @Column(name = "CONTENT", columnDefinition = "CLOB(1K)")
+    @Column(name = "TITLE", nullable = false)
     @NotNull
-    @Size(min = 20, max = 1000)
+    @Min(10)
+    private String title;
+
+    @Lob
+    @Column(name = "CONTENT", columnDefinition = "CLOB(64K)")
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "ENTRY_ID")
-    private Entry entry;
+    @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY)
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -45,6 +47,14 @@ public class Comment {
         this.date = date;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
@@ -53,11 +63,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Entry getEntry() {
-        return entry;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setEntry(Entry entry) {
-        this.entry = entry;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

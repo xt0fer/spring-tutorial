@@ -4,17 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import teach.blog.service.NewsService;
+import teach.blog.service.BlogService;
 
 @Controller
+@RequestMapping("/")
 public class FrontController {
 
     @Autowired
-    private NewsService newsService;
+    private BlogService blogService;
 
-    @RequestMapping("/index")
+    @RequestMapping
     public String hello(ModelMap model) {
-        model.addAttribute("news", newsService.getAllNews());
+        model.addAttribute("entries", blogService.getEntries());
         return "front";
     }
 

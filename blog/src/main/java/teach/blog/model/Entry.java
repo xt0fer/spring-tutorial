@@ -3,6 +3,7 @@ package teach.blog.model;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Entry {
 
     @Column(name = "TITLE", nullable = false)
     @NotNull
-    @Min(10)
+    @Size(min = 10)
     private String title;
 
     @Lob

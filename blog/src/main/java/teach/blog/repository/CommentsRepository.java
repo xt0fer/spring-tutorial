@@ -24,4 +24,35 @@ public class CommentsRepository {
                 .addOrder(Order.asc("date"))
                 .list();
     }
+
+    public Comment getCommentById(Long id) {
+        return (Comment) sessionFactory
+                .getCurrentSession()
+                .get(Comment.class, id);
+    }
+
+    public void deleteComment(Comment comment) {
+        sessionFactory
+                .getCurrentSession()
+                .delete(comment);
+    }
+
+    public Comment getCommentByEntryIdAndCommentId(Long entryId, Long commentId) {
+        return (Comment) sessionFactory
+                .getCurrentSession()
+                .createCriteria(Comment.class)
+                .add(
+                        Restrictions.and(
+                                Restrictions.eq("entry.id", entryId),
+                                Restrictions.eq("id", commentId)
+                        )
+                )
+                .uniqueResult();
+    }
+
+    public void saveComment(Comment comment) {
+        sessionFactory
+                .getCurrentSession()
+                .saveOrUpdate(comment);
+    }
 }

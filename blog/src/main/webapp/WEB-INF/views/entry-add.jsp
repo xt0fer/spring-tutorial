@@ -11,7 +11,7 @@
 
         <div class="col-sm-10">
             <form:input path="title" cssClass="form-control"/>
-            <form:errors path="title" cssClass="label label-important"/>
+            <form:errors path="title" cssClass="text-danger"/>
         </div>
     </div>
 

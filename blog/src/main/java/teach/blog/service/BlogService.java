@@ -8,6 +8,7 @@ import teach.blog.model.Entry;
 import teach.blog.repository.CommentsRepository;
 import teach.blog.repository.EntriesRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,5 +39,18 @@ public class BlogService {
 
     public void saveEntry(Entry entry) {
         entriesRepository.save(entry);
+    }
+
+    public void deleteComment(Long commentId, Long entryId) {
+        Comment comment = commentsRepository.getCommentByEntryIdAndCommentId(entryId, commentId);
+        if (comment != null) {
+            commentsRepository.deleteComment(comment);
+        }
+    }
+
+    public void saveComment(Comment comment, Long entryId) {
+        comment.setEntry(getEntryById(entryId));
+        comment.setDate(new Date());
+        commentsRepository.saveComment(comment);
     }
 }

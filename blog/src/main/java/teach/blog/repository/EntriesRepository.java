@@ -30,9 +30,11 @@ public class EntriesRepository {
 
     public void deleteEntryById(Long id) {
         Entry entry = getEntryById(id);
-        sessionFactory
-                .getCurrentSession()
-                .delete(entry);
+        if (entry != null) {
+            sessionFactory
+                    .getCurrentSession()
+                    .delete(entry);
+        }
     }
 
     public void save(Entry entry) {

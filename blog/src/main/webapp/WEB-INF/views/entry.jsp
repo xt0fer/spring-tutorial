@@ -11,18 +11,18 @@
 <h2>Comments</h2>
 <c:forEach items="${comments}" var="comment">
     <div>
-        <c:out value="${comment.comment}"/>
         <div class="clearfix">
             <div class="pull-left">
                 ${comment.date}
             </div>
             <div class="pull-right">
-                <a href="/blog/entry/${entryid}/comment/${comment.id}/delete" class="btn btn-danger">Sterge</a>
+                <a href="/blog/entry/${entry.id}/comment/${comment.id}/delete" class="btn btn-danger btn-xs">Sterge</a>
             </div>
         </div>
+        <c:out value="${comment.content}"/>
     </div>
     <hr>
 </c:forEach>
-<a href="/blog/entry/${entry.id}/comment/add" class="btn">Adauga comentariu</a>
+<a href="/blog/entry/${entry.id}/comment/add" class="btn btn-default">Adauga comentariu</a>
 
 <jsp:include page="template/footer.jsp" />

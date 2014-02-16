@@ -9,38 +9,45 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import teach.secblog.model.Comment;
-import teach.secblog.service.NewsService;
+import teach.secblog.service.BlogService;
 
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/comments")
+@RequestMapping("/entry/{entryid}/comment")
 public class CommentsController {
-
     @Autowired
-    private NewsService newsService;
+    private BlogService blogService;
 
-    @RequestMapping(value = "/delete/{newsindex}/{commentindex}", method = RequestMethod.GET)
-    public String deleteComment(ModelMap model, @PathVariable("newsindex") Integer newsindex, @PathVariable("commentindex") Integer commentindex) {
-        newsService.deleteComment(newsindex, commentindex);
-        return "redirect:/news/" + newsindex + ".do";
+
+    @RequestMapping(value = "/{commentid}/delete", method = RequestMethod.GET)
+    public String deleteComment(ModelMap model, @PathVariable("entryid") Long entryId, @PathVariable("commentid") Long commentId) {
+        blogService.deleteComment(commentId, entryId);
+        return "redirect:/blog/entry/" + entryId;
     }
 
-    @RequestMapping(value = "/add/{newsindex}", method = RequestMethod.GET)
-    public String addComment(ModelMap model, @PathVariable("newsindex") Integer newsindex) {
-        model.addAttribute("comment", new Comment());
-        model.addAttribute("newsindex", newsindex);
-        return "addComment";
-    }
-
-    @RequestMapping(value = "/add/{newsindex}", method = RequestMethod.POST)
-    public String saveComment(@Valid @ModelAttribute("comment") Comment comment, BindingResult bindingResult, @PathVariable("newsindex") Integer newsindex, ModelMap model) {
-        if (bindingResult.hasErrors()) {
-            return "addComment";
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addComment(ModelMap model, @PathVariable("entryid") Long entryId) {
+        if (blogService.getEntryById(entryId) == null) {
+            return "redirect:/blog/";
         }
 
-        newsService.addComment(newsindex, comment);
+        model.addAttribute("comment", new Comment());
+        return "comment-add";
+    }
 
-        return "redirect:/news/" + newsindex + ".do";
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String saveComment(@Valid @ModelAttribute("comment") Comment comment, BindingResult bindingResult, @PathVariable("entryid") Long entryId) {
+        if (blogService.getEntryById(entryId) == null) {
+            return "redirect:/blog/";
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "comment-add";
+        }
+
+        blogService.saveComment(comment, entryId);
+
+        return "redirect:/blog/entry/" + entryId;
     }
 }

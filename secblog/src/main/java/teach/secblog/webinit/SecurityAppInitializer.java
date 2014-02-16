@@ -1,4 +1,4 @@
-package teach.secblog.config;
+package teach.secblog.webinit;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

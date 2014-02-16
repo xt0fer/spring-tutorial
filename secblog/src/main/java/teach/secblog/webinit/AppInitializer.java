@@ -1,4 +1,4 @@
-package teach.secblog.config;
+package teach.secblog.webinit;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -11,14 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 public class AppInitializer implements WebApplicationInitializer {
-
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         WebApplicationContext context = getContext();
 
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("*.do");
+        dispatcher.addMapping("/blog/*");
 
         servletContext.addListener(new ContextLoaderListener(context));
     }
@@ -28,5 +27,4 @@ public class AppInitializer implements WebApplicationInitializer {
         context.setConfigLocation("teach.secblog.config");
         return context;
     }
-
 }

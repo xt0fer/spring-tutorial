@@ -38,23 +38,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 .antMatchers(
-                        "/news/add.do",
-                        "/news/delete/**",
-                        "/comments/delete/**"
+                        "/entry/add",
+                        "/entry/*/delete",
+                        "/entry/*/comment/*/delete"
                 ).hasRole("ADMIN")
                 .antMatchers(
-                        "/comments/add/**"
+                        "/entry/*/comment/add"
                 ).hasRole("USER")
 
                 .anyRequest().permitAll();
 
         http.formLogin()
-                .loginPage("/login.do")
+                .loginPage("/blog/login")
                 .permitAll();
 
         http.logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/index.do")
+                .logoutUrl("/blog/logout")
+                .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .permitAll();

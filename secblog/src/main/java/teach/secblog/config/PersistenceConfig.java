@@ -1,4 +1,4 @@
-package teach.blog.config;
+package teach.secblog.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -62,7 +62,7 @@ public class PersistenceConfig {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(getDataSource());
         sessionFactory.setHibernateProperties(getHibernateProperties());
-        sessionFactory.setPackagesToScan(new String[]{"teach.blog.model"});
+        sessionFactory.setPackagesToScan(new String[]{"teach.secblog.model"});
         return sessionFactory;
     }
 

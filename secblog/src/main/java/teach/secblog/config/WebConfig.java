@@ -22,11 +22,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login.do").setViewName("login");
-//        registry.addViewController("/logout.do").setViewName("logout");
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-    }
 }

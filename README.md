@@ -12,4 +12,4 @@ Spring Framework Tutorial
 7. Spring Web MVC Framework
 8. Spring Security
 
-Slides URL: http://slid.es/soaserele/spring-tutorial
+Updated to modern Spring v5.3 (2022)
